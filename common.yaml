@@ -1,0 +1,46 @@
+machine:
+  install:
+      disk: /dev/sda
+      wipe: true
+  network:
+    hostname: talos
+    nameservers:
+      - 10.0.0.1
+    interfaces:
+      - deviceSelector:
+          busPath: "0*"
+        mtu: 1500
+        dhcp: false
+        vlans:
+          - vlanId: 100
+            addresses:
+              - "192.168.2.10/28"
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 192.168.2.1
+        wireguard:
+          privateKey: <privatekey file contents>
+          listenPort: 51820
+          peers:
+            allowedIPs:
+              - 192.168.88.0/24
+            endpoint: 209.202.254.14.8172
+            publicKey: ABCDEF...
+
+  registries:
+      mirrors:
+        docker.io:
+          endpoints:
+          - http://10.5.0.1:6000/
+        gcr.io:
+          endpoints:
+          - http://10.5.0.1:6000/
+        ghcr.io:
+          endpoints:
+          - http://10.5.0.1:6000/
+        registry.k8s.io:
+          endpoints:
+          - http://10.5.0.1:6000/
+  time:
+    servers:
+      - time.cloudflare.com
