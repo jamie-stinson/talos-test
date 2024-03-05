@@ -38,6 +38,18 @@ machine:
 cluster:
     controlPlane:
         endpoint: https://10.0.0.24:6443
+    clusterName: talos.local
+    network:
+        # The CNI used.
+        cni:
+            name: flannel # Name of CNI to use.
+        dnsDomain: cluster.local # The domain used by Kubernetes DNS.
+        # The pod subnet CIDR.
+        podSubnets:
+            - 10.244.0.0/16
+        # The service subnet CIDR.
+        serviceSubnets:
+            - 10.96.0.0/12
     inlineManifests:
         - name: namespace-platform-cicd
           contents: |-
