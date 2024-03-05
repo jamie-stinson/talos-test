@@ -36,6 +36,8 @@ machine:
   #               nodeID: {}
   #               slot: 0 # Key slot number for LUKS2 encryption.
 cluster:
+    controlPlane:
+        endpoint: https://10.0.0.24:6443
     inlineManifests:
         - name: namespace-platform-cicd
           contents: |-
