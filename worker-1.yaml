@@ -1,0 +1,7 @@
+machine:
+    type: worker
+  network:
+    hostname: worker-1
+    interfaces:
+            addresses:
+              - "10.0.0.30/26"

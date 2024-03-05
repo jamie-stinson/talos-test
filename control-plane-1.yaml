@@ -1,4 +1,7 @@
 machine:
-    type: controlplane
-    install:
-        disk: /dev/sda
+    type: control-plane
+  network:
+    hostname: control-plane-1
+    interfaces:
+            addresses:
+              - "10.0.0.20/26"
