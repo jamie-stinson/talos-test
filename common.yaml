@@ -1,5 +1,7 @@
 machine:
+  type: controlplane
   network:
+    hostname: controlplane-1
     nameservers:
       - 10.0.0.1
     interfaces:
@@ -13,13 +15,6 @@ machine:
             gateway: 10.0.0.1 # The route's gateway (if empty, creates link scope route).
             metric: 1024 # The optional metric for the route.
         mtu: 1500 # The interface's MTU.
-machine:
-    type: worker
-  network:
-    hostname: worker-1
-    interfaces:
-            addresses:
-              - "10.0.0.24/24"
         # wireguard:
         #   privateKey: <privatekey file contents>
         #   listenPort: 51820
