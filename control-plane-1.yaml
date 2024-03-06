@@ -1,7 +1,10 @@
 machine:
-    type: control-plane
+  type: controlplane
   network:
-    hostname: control-plane-1
+    hostname: controlplane-1
+    nameservers:
+      - 10.0.0.1
     interfaces:
-            addresses:
-              - "10.0.0.20/26"
+      - interface: eth0
+        addresses:
+          - 10.0.0.24/24

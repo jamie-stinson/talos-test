@@ -1,3 +1,6 @@
+version: v1alpha1
+debug: false
+persist: true
 machine:
   type: controlplane
   network:
@@ -5,36 +8,15 @@ machine:
     nameservers:
       - 10.0.0.1
     interfaces:
-      - interface: eth0 # The interface name.
-        # Assigns static IP addresses to the interface.
-        addresses:
-          - 10.0.0.24/24
-        # A list of routes associated with the interface.
+      - interface: eth0
         routes:
           - network: 0.0.0.0/0 # The route's network (destination).
             gateway: 10.0.0.1 # The route's gateway (if empty, creates link scope route).
             metric: 1024 # The optional metric for the route.
         mtu: 1500 # The interface's MTU.
-        # wireguard:
-        #   privateKey: <privatekey file contents>
-        #   listenPort: 51820
-        #   peers:
-        #     allowedIPs:
-        #       - 192.168.88.0/24
-        #     endpoint: 209.202.254.14.8172
-        #     publicKey: ABCDEF...
   time:
     servers:
       - time.cloudflare.com
-  # systemDiskEncryption:
-  #     # Ephemeral partition encryption.
-  #     ephemeral:
-  #         provider: luks2 # Encryption provider to use for the encryption.
-  #         # Defines the encryption keys generation and storage method.
-  #         keys:
-  #             - # Deterministically generated key from the node UUID and PartitionLabel.
-  #               nodeID: {}
-  #               slot: 0 # Key slot number for LUKS2 encryption.
 cluster:
     controlPlane:
         endpoint: https://10.0.0.24:6443
@@ -69,18 +51,3 @@ cluster:
             kind: Namespace
             metadata:
             	name: platform-ingress
-
-  # registries:
-  #     mirrors:
-  #       docker.io:
-  #         endpoints:
-  #         - http://10.5.0.1:6000/
-  #       gcr.io:
-  #         endpoints:
-  #         - http://10.5.0.1:6000/
-  #       ghcr.io:
-  #         endpoints:
-  #         - http://10.5.0.1:6000/
-  #       registry.k8s.io:
-  #         endpoints:
-  #         - http://10.5.0.1:6000/
